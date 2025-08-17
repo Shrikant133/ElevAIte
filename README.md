@@ -1,83 +1,58 @@
-# ElevAIte
-Search-Optimized Workflow Management System
----
-
 # Student CRM System
 
-A lightweight, self-hosted CRM tailored for students to track **internships, job applications, and research opportunities** — all in one place.
+A comprehensive CRM system for students to track internships, jobs, and research opportunities.
 
----
+## Features
 
-## 📑 Table of Contents
+- **Opportunity Tracking**: Track internships, jobs, and research opportunities with custom pipelines
+- **Networking**: Manage contacts with relationship tracking and interaction logging
+- **Document Management**: Version control for resumes and cover letters with full-text search
+- **Smart Matching**: AI-powered opportunity scoring and recommendations
+- **Automation**: Rules engine for follow-ups, reminders, and notifications
+- **Analytics**: Funnel analysis, success rates, and performance tracking
+- **Self-hosted**: Everything runs locally or on a single VM
 
-* [Features](#-features)
-* [Architecture](#-architecture)
-* [Quick Start](#-quick-start)
-* [Development](#-development)
-* [Deployment](#-deployment)
-* [Configuration](#-configuration)
-* [Initial Setup](#-initial-setup)
-* [API Documentation](#-api-documentation)
-* [Contributing](#-contributing)
+## Quick Start
 
----
-
-## ✨ Features
-
-* **Opportunity Management** – Track internships, jobs, and research openings with customizable pipelines.
-* **Networking CRM** – Manage recruiter/mentor contacts, track relationships and interactions.
-* **Resume & Document Hub** – Version control with search across resumes, cover letters, and notes.
-* **AI-powered Matching** – Smart scoring and recommendations for opportunities.
-* **Automation Engine** – Set up reminders, notifications, and follow-up tasks.
-* **Analytics Dashboard** – Funnel analysis, conversion rates, and performance insights.
-* **Self-Hosted** – Runs locally or on a single VM with Docker.
-
----
-
-## 🏗 Architecture
-
-* **API** – FastAPI + PostgreSQL
-* **Worker** – Celery + Redis (background jobs)
-* **Search** – Meilisearch (fast full-text search)
-* **Frontend** – Next.js (React)
-* **Reverse Proxy** – Nginx
-* **Containerization** – Docker Compose for all services
-
----
-
-## ⚡ Quick Start
-
-1. **Clone repository**
+1. **Clone the repository**
 
    ```bash
    git clone <repository-url>
    cd student-crm
+
    ```
 
 2. **Set up environment**
 
    ```bash
    cp .env.example .env
-   # Edit .env with your config
+   # Edit .env with your configuration
    ```
 
-3. **Run with Docker**
+3. **Start the system**
 
    ```bash
    docker-compose up -d
    ```
 
-4. **Access services**
+4. **Access the application**
 
-   * App → [http://localhost](http://localhost)
-   * API Docs → [http://localhost/api/docs](http://localhost/api/docs)
-   * Meilisearch → [http://localhost:7700](http://localhost:7700)
+   - **Frontend**: [http://localhost](http://localhost)
+   - **API Documentation**: [http://localhost/api/docs](http://localhost/api/docs)
+   - **Meilisearch Dashboard**: [http://localhost:7700](http://localhost:7700)
 
----
+## Architecture
 
-## 🔧 Development
+- **API**: FastAPI with PostgreSQL
+- **Worker**: Celery with Redis for background jobs
+- **Search**: Meilisearch for full-text search
+- **Frontend**: Next.js React application
+- **Reverse Proxy**: Nginx
+- All services containerized with Docker
 
-### API
+## Development
+
+### API Development
 
 ```bash
 cd api
@@ -85,7 +60,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Frontend
+### Frontend Development
 
 ```bash
 cd frontend
@@ -93,7 +68,7 @@ npm install
 npm run dev
 ```
 
-### Worker
+### Worker Development
 
 ```bash
 cd worker
@@ -101,73 +76,56 @@ pip install -r requirements.txt
 celery -A app.worker worker --loglevel=info
 ```
 
----
-
-## 🚀 Deployment
+## Production Deployment
 
 ### Local VM
 
 ```bash
+# Production docker-compose
 docker-compose -f docker-compose.prod.yml up -d
 ```
 
-### Azure VM (optional)
+### Azure VM (Optional)
 
 ```bash
+# Create Azure VM
 az vm create --resource-group myResourceGroup --name student-crm-vm --image Ubuntu2004
+
+# SSH and setup
 ssh user@vm-ip
 git clone <repository-url>
 cd student-crm
 docker-compose up -d
 ```
 
----
+## Configuration
 
-## ⚙️ Configuration
+### Environment Variables
 
-| Variable       | Description                             |
-| -------------- | --------------------------------------- |
-| `JWT_SECRET`   | Secret key for JWT tokens               |
-| `DATABASE_URL` | PostgreSQL connection string            |
-| `REDIS_URL`    | Redis connection string                 |
-| `SMTP_*`       | SMTP config for email notifications     |
-| `AZURE_*`      | Azure Blob Storage for optional backups |
+- **JWT_SECRET**: Secret key for JWT tokens
+- **DATABASE_URL**: PostgreSQL connection string
+- **REDIS_URL**: Redis connection string
+- **SMTP\_**\*: Email configuration for notifications
+- **AZURE\_**\*: Optional Azure Blob Storage for backups
 
----
+### Initial Setup
 
-## 🛠 Initial Setup
+- Create admin user via API
+- Configure SMTP for email notifications
+- Set up backup schedule
+- Configure search indexes
 
-* Create an **admin user** via API
-* Configure **SMTP** for emails
-* Schedule **backups**
-* Build **search indexes**
+## API Documentation
 
----
+The API provides RESTful endpoints for:
 
-## 📖 API Documentation
+- **Authentication** (`/auth/*`)
+- **Opportunities** (`/opportunities/*`)
+- **Applications** (`/applications/*`)
+- **Contacts** (`/contacts/*`)
+- **Documents** (`/documents/*`)
+- **Tasks** (`/tasks/*`)
+- **Rules** (`/rules/*`)
+- **Analytics** (`/analytics/*`)
 
-REST endpoints:
-
-* `/auth/*` – Authentication
-* `/opportunities/*` – Opportunities
-* `/applications/*` – Applications
-* `/contacts/*` – Contacts
-* `/documents/*` – Documents
-* `/tasks/*` – Tasks & reminders
-* `/rules/*` – Automation rules
-* `/analytics/*` – Analytics
-
-📍 Full API reference: [http://localhost/api/docs](http://localhost/api/docs)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-
-1. Fork the repo
-2. Create a feature branch
-3. Commit changes
-4. Open a Pull Request
-
----
+Full API documentation available at `/api/docs`
