@@ -1,4 +1,5 @@
-# Student CRM System
+# ElevAlte
+### Student CRM System
 
 A comprehensive CRM system for students to track internships, jobs, and research opportunities.
 
